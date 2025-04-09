@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
 from octofit_tracker.models import User, Team, Activity, Leaderboard, Workout
+from datetime import timedelta
 
 class Command(BaseCommand):
     help = 'Populate the database with test data'
@@ -21,8 +22,8 @@ class Command(BaseCommand):
         team1.members.add(user1, user2)
 
         # Add test activities
-        Activity.objects.create(user=user1, activity_type='Running', duration='00:30:00')
-        Activity.objects.create(user=user2, activity_type='Cycling', duration='01:00:00')
+        Activity.objects.create(user=user1, activity_type='Running', duration=timedelta(minutes=30))
+        Activity.objects.create(user=user2, activity_type='Cycling', duration=timedelta(hours=1))
 
         # Add test leaderboard entries
         Leaderboard.objects.create(user=user1, score=100)
